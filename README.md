@@ -1,8 +1,8 @@
 ## Table of Contents <!-- omit in toc -->
 - [Overview](#overview)
-  - [Level 2: Features](#level-2-features)
-  - [Level 2: Video labels](#level-2-video-labels)
-  - [Level 2: Words](#level-2-words)
+  - [Level 2: Feature Series](#level-2-feature-series)
+  - [Level 2: Video label Series](#level-2-video-label-series)
+  - [Level 2: Words Series](#level-2-words-series)
   - [Level 3: Expression level dialogue labels](#level-3-expression-level-dialogue-labels)
   - [Considerations](#considerations)
   - [Download Link](#download-link)
@@ -11,15 +11,15 @@
 
 ## Overview
 
-This fine-grain annotated POM dataset was produced for opinion mining. It includes opinion annotations at the sentence, expression and token levels. Further details can be found in ([Garcia et al. 2019 (1)](https://arxiv.org/abs/1902.10102)). As part of preprocessing, punctuation was added to the original POM text corpus. The dataset is stored as a pickled pandas [MultiIndex DataFrame](https://pandas.pydata.org/pandas-docs/stable/user_guide/advanced.html#hierarchical-indexing-multiindex).
+This dataset is an opinion annotated variant of the Persuasive Opinion Multimedia (POM) corpus. It was developed for the opinion prediction task and includes opinion annotations at two levels. The first annotation denotes the textual span of the opinion. The second annotation denotes the span of opinion components (e.g. holder, target, polarity). Further details can be found in ([Garcia et al. 2019 (1)](https://arxiv.org/abs/1902.10102)). As part of preprocessing, punctuation was added to the text of the original corpus. The dataset is stored as a pickled pandas [MultiIndex DataFrame](https://pandas.pydata.org/pandas-docs/stable/user_guide/advanced.html#hierarchical-indexing-multiindex).
 
-The hierarchical structure can be understood according to the array which forms the MultiIndex. The first element of the index is one of the following values: 'level_0', 'features', 'labels', 'words' or 'seq_level_labels_lvl1'.
+The hierarchical index structure can be understood according to the array which forms the MultiIndex object. The first element of the index is one of the following values: 'features', 'labels', 'level_0', 'seq_level_labels_lvl1' or 'words'.
 
-The value 'level_0' provides a MultiIndex Series containing the following tuple of labels: ['index_text', 'id_sentence', 'level_1'] where 'index_text' indexes the raw filename for each movie review, 'id_sentence' indexes the sentences in the review, and 'level_1' indexes each word in each sentence. This MultiIndex Series indexes the rows of each of the following Dataframes.
+The value 'words' provides a MultiIndex Series containing the following tuple of values: ['index_text', 'id_sentence', 'level_1'] where 'index_text' indexes the raw filename for each movie review, 'id_sentence' indexes the sentences in the review, and 'level_1' indexes each word in each sentence. This MultiIndex Series indexes the rows of each of the following Dataframes.
 
-### Level 2: Features
+### Level 2: Feature Series
 
-Dataset features (columns) are indexed according to the tuple ('features', [feature name], dimension) where the number of dimensions count the number of columns that comprise a particular feature.
+Feature series are indexed according to the tuple ('features', [feature name], dimension) where the number of dimensions count the number of series that comprise a particular feature.
 
 | feature name          | feature type          | dimensions |
 | --------------------- | --------------------- | ---------- |
@@ -30,9 +30,9 @@ Dataset features (columns) are indexed according to the tuple ('features', [feat
 | intervals             | word start, word stop | 2          |
 
 
-### Level 2: Video labels
+### Level 2: Video label Series
 
-Dataset video labels (columns) are indexed according to the tuple ('labels', [label name], dimension) where the number of dimensions counts the number of columns that comprise a particular label.
+Dataset video label series are indexed according to the tuple ('labels', [label name], dimension) where the number of dimensions counts the number of series that comprise a particular label.
 
 | label name              | dimensions |
 | ----------------------- | ---------- |
@@ -40,15 +40,14 @@ Dataset video labels (columns) are indexed according to the tuple ('labels', [la
 | label_video_persuasion  | 1          |
 | label_video_sentiment   | 1          |
 
-### Level 2: Words
+### Level 2: Words Series
 
-Dataset words (columns) are indexed according to the tuple ('words', 'feature_words').
+Dataset word series are indexed according to the tuple ('words', 'feature_words', 0).
 
 ### Level 3: Expression level dialogue labels
+Annotation labels (columns) are indexed according to the tuple ('seq_level_labels_lvl1', 'seq_level_labels_lvl2'). Labels consist of all holders, polarities, and targets in the dataset. Each label is boolean. The exception is the '4_levels_polarity' label which can take the values '0', '1', or '2'.
 
-Expression level dialogue labels are indexed according to the tuple ('seq_level_labels_lvl1', 'seq_level_labels_lvl2', [predefined target]).
-
-| predefined target                     |
+| labels                                |
 | ------------------------------------- |
 | 4_levels_polarity                     |
 | Actor                                 |
@@ -91,6 +90,11 @@ The dataset is available for download through registration at the following link
 http://service.tsi.telecom-paristech.fr/cgi-bin/user-service/subscribe.cgi?form=&license=1&ident=POM
 
 If prompted to sign in simply click 'Cancel' in order to navigate to the registration page.
+
+Filezilla is the recommended FTP client. Please make sure to use the following configuration when connecting to the server.
+
+![title](Images/general.png "General settings")
+![title](Images/advanced.png "Advanced settings")
 
 ### Contact Information
 
