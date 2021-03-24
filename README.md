@@ -1,9 +1,9 @@
 ## Table of Contents <!-- omit in toc -->
 - [Overview](#overview)
-  - [Level 2: Feature Series](#level-2-feature-series)
-  - [Level 2: Video label Series](#level-2-video-label-series)
-  - [Level 2: Words Series](#level-2-words-series)
-  - [Level 3: Expression level dialogue labels](#level-3-expression-level-dialogue-labels)
+  - [Features](#features)
+  - [Video labels](#video-labels)
+  - [Words](#words)
+  - [Opinion labels](#opinion-labels)
   - [Considerations](#considerations)
   - [Download Link](#download-link)
   - [Contact Information](#contact-information)
@@ -15,11 +15,11 @@ This dataset is an opinion annotated variant of the Persuasive Opinion Multimedi
 
 The hierarchical index structure can be understood according to the array which forms the MultiIndex object. The first element of the index is one of the following values: 'features', 'labels', 'level_0', 'seq_level_labels_lvl1' or 'words'.
 
-The value 'words' provides a MultiIndex Series containing the following tuple of values: ['index_text', 'id_sentence', 'level_1'] where 'index_text' indexes the raw filename for each movie review, 'id_sentence' indexes the sentences in the review, and 'level_1' indexes each word in each sentence. This MultiIndex Series indexes the rows of each of the following Dataframes.
+Each row in 'words' is indexed by the following tuple of values: ['index_text', 'id_sentence', 'level_1'] where 'index_text' indexes the raw filename for each movie review, 'id_sentence' indexes the sentences in the review, and 'level_1' indexes each word in each sentence. This array indexes the rows of each of the following pieces of data in the dataframe.
 
-### Level 2: Feature Series
+### Features
 
-Feature series are indexed according to the tuple ('features', [feature name], dimension) where the number of dimensions count the number of series that comprise a particular feature.
+Features consist of the tuple ('features', [feature name], dimension) where the number of dimensions count the number of columns that comprise a particular feature.
 
 | feature name          | feature type          | dimensions |
 | --------------------- | --------------------- | ---------- |
@@ -30,9 +30,9 @@ Feature series are indexed according to the tuple ('features', [feature name], d
 | intervals             | word start, word stop | 2          |
 
 
-### Level 2: Video label Series
+### Video labels
 
-Dataset video label series are indexed according to the tuple ('labels', [label name], dimension) where the number of dimensions counts the number of series that comprise a particular label.
+Video labels consist of the tuple ('labels', [label name], dimension) where the number of dimensions count the number of columns that comprise a particular label.
 
 | label name              | dimensions |
 | ----------------------- | ---------- |
@@ -40,12 +40,12 @@ Dataset video label series are indexed according to the tuple ('labels', [label 
 | label_video_persuasion  | 1          |
 | label_video_sentiment   | 1          |
 
-### Level 2: Words Series
+### Words
 
-Dataset word series are indexed according to the tuple ('words', 'feature_words', 0).
+Words consist of the tuple ('words', 'feature_words', 0).
 
-### Level 3: Expression level dialogue labels
-Annotation labels (columns) are indexed according to the tuple ('seq_level_labels_lvl1', 'seq_level_labels_lvl2'). Labels consist of all holders, polarities, and targets in the dataset. Each label is boolean. The exception is the '4_levels_polarity' label which can take the values '0', '1', or '2'.
+### Opinion labels
+Opinion labels consist of the tuple ('seq_level_labels_lvl1', 'seq_level_labels_lvl2', [label]). Labels consist of all holders, polarities, and targets in the dataset. Each label is boolean. The exception is the '4_levels_polarity' label which can take the values '0', '1', or '2'.
 
 | labels                                |
 | ------------------------------------- |
@@ -98,7 +98,7 @@ Filezilla is the recommended FTP client. Please make sure to use the following c
 
 ### Contact Information
 
-Please direction any questions or concerns regarding this dataset to Tanvi Dinkar (tanvi.dinkar@telecom-paris.fr) or Ebenge Usip (ebenge.usip@telecom-paris.fr).
+Please direction any questions or concerns regarding this dataset to Ebenge Usip (ebenge.usip@telecom-paris.fr), Tanvi Dinkar (tanvi.dinkar@telecom-paris.fr) and Chloé Clavel (chloe;clavel@telecom-paris.fr).
 
 ### Citation information
 
