@@ -69,7 +69,7 @@ Opinion labels consist of the tuple (`seq_level_labels_lvl1`, `seq_level_labels_
 | Very\\\\_Positive                     | expression-level |
 | Vision and Special effect             | expression-level |
 
-There are two unique expression-level labels: `Negative_levels` and `Positive_labels`. They are both aggregate labels that only take the value '1' if either the values 'Negative' OR 'Very\\_Negative' ('Positive' OR 'Very\\_Positive') take the value '1' at the expression level.
+There are two unique expression-level labels: `Negative_levels` and `Positive_labels`. They are both aggregate labels that only take the value '1' if either the values `Negative` OR `Very\\_Negative` (`Positive` OR `Very\\_Positive`) take the value '1' at the expression level.
 
 An example of a sentence from the dataset is: 
 
