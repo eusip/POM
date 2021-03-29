@@ -2,7 +2,6 @@
 - [Overview](#overview)
   - [Features](#features)
   - [Video labels](#video-labels)
-  - [Words](#words)
   - [Opinion labels](#opinion-labels)
   - [Considerations](#considerations)
   - [Download Link](#download-link)
@@ -11,15 +10,15 @@
 
 ## Overview
 
-This dataset is an opinion annotated variant of the Persuasive Opinion Multimedia (POM) corpus. It was developed for the opinion prediction task and includes opinion annotations at two levels. The first annotation denotes the textual span of the opinion. The second annotation denotes the span of opinion components (e.g. holder, target, polarity). Further details can be found in ([Garcia et al. 2019 (1)](https://arxiv.org/abs/1902.10102)). As part of preprocessing, punctuation was added to the text of the original corpus. The dataset is stored as a pickled pandas [MultiIndex DataFrame](https://pandas.pydata.org/pandas-docs/stable/user_guide/advanced.html#hierarchical-indexing-multiindex).
+This dataset is an annotated variant of the Persuasive Opinion Multimedia (POM) corpus. It was developed for the opinion prediction task and includes opinion annotations at the expression and word levels. Expression-level annotations label the textual span of the opinion. Word-level annotations (e.g. holder, target, polarity) label the word components of the opinion. Further details can be found in ([Garcia et al. 2019 (1)](https://arxiv.org/abs/1902.10102)). As part of preprocessing, punctuation was added to the text of the original corpus. The dataset is stored as a pickled pandas [MultiIndex DataFrame](https://pandas.pydata.org/pandas-docs/stable/user_guide/advanced.html#hierarchical-indexing-multiindex).
 
-The hierarchical index structure can be understood according to the array which forms the MultiIndex object. The first element of the index is one of the following values: 'features', 'labels', 'level_0', 'seq_level_labels_lvl1' or 'words'.
+The hierarchical index structure can be understood according to the array which forms the MultiIndex object. The first element of the index is one of the following values: `features`, `labels`, `level_0`, `seq_level_labels_lvl1` or `words`.
 
-Each row in 'words' is indexed by the following tuple of values: ['index_text', 'id_sentence', 'level_1'] where 'index_text' indexes the raw filename for each movie review, 'id_sentence' indexes the sentences in the review, and 'level_1' indexes each word in each sentence. This array indexes the rows of each of the following pieces of data in the dataframe.
+Each row in `words` is indexed by the following tuple of values: [`index_text`, `id_sentence`, `level_1`] where `index_text` indexes the raw filename for each movie review, `id_sentence` indexes the sentences in the review, and `level_1` indexes each word in each sentence. This same tuple indexes the rows of each of the following pieces of data in the dataframe.
 
 ### Features
 
-Features consist of the tuple ('features', [feature name], dimension) where the number of dimensions count the number of columns that comprise a particular feature.
+Features consist of the tuple (`features`, `[feature name]`, `dimension`) where the number of dimensions count the number of columns that comprise a particular feature. This data originates from the original POM corpus (Park et al. 2014) but was re-aligned so that it could be incorporated into this dataset.
 
 | feature name          | feature type          | dimensions |
 | --------------------- | --------------------- | ---------- |
@@ -32,7 +31,7 @@ Features consist of the tuple ('features', [feature name], dimension) where the 
 
 ### Video labels
 
-Video labels consist of the tuple ('labels', [label name], dimension) where the number of dimensions count the number of columns that comprise a particular label.
+Video labels consist of the tuple (`labels`, `[label name]`, `dimension`) where the number of dimensions count the number of columns that comprise a particular label. This data also originates from the original POM corpus (Park et al. 2014) and was re-aligned.
 
 | label name              | dimensions |
 | ----------------------- | ---------- |
@@ -40,39 +39,43 @@ Video labels consist of the tuple ('labels', [label name], dimension) where the 
 | label_video_persuasion  | 1          |
 | label_video_sentiment   | 1          |
 
-### Words
-
-Words consist of the tuple ('words', 'feature_words', 0).
-
 ### Opinion labels
-Opinion labels consist of the tuple ('seq_level_labels_lvl1', 'seq_level_labels_lvl2', [label]). Labels consist of all holders, polarities, and targets in the dataset. Each label is boolean. The exception is the '4_levels_polarity' label which can take the values '0', '1', or '2'.
+Opinion labels consist of the tuple (`seq_level_labels_lvl1`, `seq_level_labels_lvl2`, `[label]`). The field `label` consist of all holders, polarities, and targets in the dataset. Each label is boolean. The exception is the sentence-level `4_levels_polarity` label which can take the value '0' (no opinion), '1' (negative opinion), or '2' (positive opinion).
 
-| labels                                |
-| ------------------------------------- |
-| 4_levels_polarity                     |
-| Actor                                 |
-| Atmosphere and mood                   |
-| Character design                      |
-| Composer - Singer - Soundmaker        |
-| Director                              |
-| Music and Sound effects               |
-| Negative                              |
-| Negative_levels                       |
-| Neutral                               |
-| Other                                 |
-| Other people involved in movie making |
-| Overall                               |
-| Polarity                              |
-| Positive                              |
-| Positive_levels                       |
-| Price                                 |
-| Producer                              |
-| Screenplay                            |
-| Target                                |
-| Token                                 |
-| Very\\\\_Negative                     |
-| Very\\\\_Positive                     |
-| Vision and Special effect             |
+| label                                 | granularity      |
+| ------------------------------------- | ---------------- |
+| 4_levels_polarity                     | sentence-level   |
+| Actor                                 | expression-level |
+| Atmosphere and mood                   | expression-level |
+| Character design                      | expression-level |
+| Composer - Singer - Soundmaker        | expression-level |
+| Director                              | expression-level |
+| Music and Sound effects               | expression-level |
+| Negative                              | expression-level |
+| Negative_levels                       | expression-level |
+| Neutral                               | expression-level |
+| Other                                 | expression-level |
+| Other people involved in movie making | expression-level |
+| Overall                               | expression-level |
+| Polarity                              | word-level       |
+| Positive                              | expression-level |
+| Positive_levels                       | expression-level |
+| Price                                 | expression-level |
+| Producer                              | expression-level |
+| Screenplay                            | expression-level |
+| Target                                | word-level       |
+| Token                                 | word-level       |
+| Very\\\\_Negative                     | expression-level |    
+| Very\\\\_Positive                     | expression-level |
+| Vision and Special effect             | expression-level |
+
+There are two unique expression-level labels: `Negative_levels` and `Positive_labels`. They are both aggregate labels that only take the value '1' if either the values 'Negative' OR 'Very\\_Negative' ('Positive' OR 'Very\\_Positive') take the value '1' at the expression level.
+
+An example of a sentence from the dataset is: 
+
+*This movie came out a few years ago and it is awesome*
+
+This sentence has a `4_levels_priority` of '2' because the sentence contains the positive expression "it is awesome". The target word is "it" so this word has a value of '1' for the label `Target`. Finally "it is" refers to the overall film so the words "it" and "is" both have values of '1' for the labels `Very\\_Positive`, `Positive_levels`, ∏and `Overall`. 
 
 ### Considerations
 
