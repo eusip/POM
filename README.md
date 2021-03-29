@@ -12,9 +12,9 @@
 
 This dataset is an annotated variant of the Persuasive Opinion Multimedia (POM) corpus. It was developed for the opinion prediction task and includes opinion annotations at the expression and word levels. Expression-level annotations label the textual span of the opinion. Word-level annotations (e.g. holder, target, polarity) label the word components of the opinion. Further details can be found in ([Garcia et al. 2019 (1)](https://arxiv.org/abs/1902.10102)). As part of preprocessing, punctuation was added to the text of the original corpus. The dataset is stored as a pickled pandas [MultiIndex DataFrame](https://pandas.pydata.org/pandas-docs/stable/user_guide/advanced.html#hierarchical-indexing-multiindex).
 
-The hierarchical index structure can be understood according to the array which forms the MultiIndex object. The first element of the index is one of the following values: `features`, `labels`, `level_0`, `seq_level_labels_lvl1` or `words`.
+The hierarchical index structure can be understood according to the tuple which forms the MultiIndex object. The first element of the index is one of the following values: `features`, `labels`, `level_0`, `seq_level_labels_lvl1` or `words`.
 
-Each row in `words` is indexed by the following tuple of values: [`index_text`, `id_sentence`, `level_1`] where `index_text` indexes the raw filename for each movie review, `id_sentence` indexes the sentences in the review, and `level_1` indexes each word in each sentence. This same tuple indexes the rows of each of the following pieces of data in the dataframe.
+Each row in `words` is indexed by the following tuple of values: (`index_text`, `id_sentence`, `level_1`) where `index_text` indexes the raw filename for each movie review, `id_sentence` indexes the sentences in the review, and `level_1` indexes each word in each sentence. This same tuple indexes the rows of each of the following pieces of data in the dataframe.
 
 ### Features
 
@@ -75,7 +75,7 @@ An example of a sentence from the dataset is:
 
 *This movie came out a few years ago and it is awesome*
 
-This sentence has a `4_levels_priority` of '2' because the sentence contains the positive expression "it is awesome". The target word is "it" so this word has a value of '1' for the label `Target`. Finally "it is" refers to the overall film so the words "it" and "is" both have values of '1' for the labels `Very\\_Positive`, `Positive_levels`, ∏and `Overall`. 
+This sentence has a `4_levels_priority` of '2' because the sentence contains the positive expression "it is awesome". The target word is "it" so this word has a value of '1' for the label `Target`. Finally "it is" refers to the overall film so the words "it" and "is" both have values of '1' for the labels `Very\\_Positive`, `Positive_levels`, and `Overall`. 
 
 ### Considerations
 
