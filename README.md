@@ -101,7 +101,7 @@ Filezilla is the recommended FTP client. Please make sure to use the following c
 
 ### Contact Information
 
-Please direction any questions or concerns regarding this dataset to Ebenge Usip (ebenge.usip@telecom-paris.fr), Tanvi Dinkar (tanvi.dinkar@telecom-paris.fr) and Chloé Clavel (chloe;clavel@telecom-paris.fr).
+Please direction any questions or concerns regarding this dataset to Chloé Clavel (chloe.clavel@telecom-paris.fr) or Tanvi Dinkar (tanvi.dinkar@telecom-paris.fr).
 
 ### Citation information
 
