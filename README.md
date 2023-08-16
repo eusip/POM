@@ -99,9 +99,12 @@ Filezilla is the recommended FTP client. Please make sure to use the following c
 ![title](Images/general.png "General settings")
 ![title](Images/advanced.png "Advanced settings")
 
+### Acknowledgement
+The documentation of this dataset, code to parse the data and its issues was done by Tanvi Dinkar.
+
 ### Contact Information
 
-Please direction any questions or concerns regarding this dataset to Chloé Clavel (chloe.clavel@telecom-paris.fr) or Tanvi Dinkar (tanvi.dinkar@telecom-paris.fr).
+Please direction any questions or concerns regarding this dataset to Chloé Clavel (chloe.clavel@telecom-paris.fr) or Tanvi Dinkar (T.Dinkar@hw.ac.uk).
 
 ### Citation information
 
