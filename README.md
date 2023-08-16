@@ -100,7 +100,7 @@ Filezilla is the recommended FTP client. Please make sure to use the following c
 ![title](Images/advanced.png "Advanced settings")
 
 ### Acknowledgement
-The documentation of this dataset, code to parse the data and its issues was done by Tanvi Dinkar.
+The documentation of this dataset and its issues, and code to parse the data were contributed by Tanvi Dinkar.
 
 ### Contact Information
 
